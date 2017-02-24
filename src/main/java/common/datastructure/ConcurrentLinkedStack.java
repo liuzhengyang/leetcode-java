@@ -22,14 +22,16 @@ public class ConcurrentLinkedStack<T> {
 	}
 
 	public T pop() {
-		Node<T> oldTop = top.get();
+		Node<T> oldTop;
 		Node<T> newTop;
-		if (oldTop == null) {
-			return null;
-		}
+
 		do {
+			oldTop  = top.get();
+			if (oldTop == null) {
+				return null;
+			}
 			newTop = oldTop.next;
-		} while(!top.compareAndSet(oldTop, newTop));
+		} while (!top.compareAndSet(oldTop, newTop));
 		return oldTop.item;
 	}
 
@@ -64,6 +66,7 @@ public class ConcurrentLinkedStack<T> {
 			}
 		}
 	}
+
 	public void print() {
 		top.get().print();
 	}
