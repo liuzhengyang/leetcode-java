@@ -1,6 +1,8 @@
 package p1
 
-import static p1.Main.addTwoNumbers
+import p2.ListNode
+
+import static p2.Main.addTwoNumbers
 
 /**
  * Description: 
