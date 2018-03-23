@@ -11,7 +11,7 @@ public class Solution {
         int sum = 0;
         for (int num : nums) {
             sum += num;
-            if (++indicies[num-1]  > 1) {
+            if (++indicies[num - 1] > 1) {
                 result[0] = num;
             }
         }
