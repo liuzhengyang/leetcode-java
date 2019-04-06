@@ -8,7 +8,17 @@ import common.datastructure.ListNode;
  */
 public class Solution {
     public static void main(String[] args) {
-
+        ListNode head;
+        head = ListNode.makeList(1, 2, 3, 4, 5);
+        System.out.println(head.print());
+        head = ListNode.makeList(1, 2, 3, 4, 5);
+        System.out.println(new Solution().reverseBetween(head, 1, 2).print());
+        head = ListNode.makeList(1, 2, 3, 4, 5);
+        System.out.println(new Solution().reverseBetween(head, 1, 1).print());
+        head = ListNode.makeList(1, 2, 3, 4, 5);
+        System.out.println(new Solution().reverseBetween(head, 1, 5).print());
+        head = ListNode.makeList(1, 2, 3, 4, 5);
+        System.out.println(new Solution().reverseBetween(head, 5, 5).print());
     }
 
     public ListNode reverseBetween(ListNode head, int m, int n) {
