@@ -5,8 +5,6 @@ package findminimulinasortedarray;
  */
 public class Solution {
     public static void main(String[] args) {
-        System.out.println(Integer.MAX_VALUE - 1 + Integer.MAX_VALUE - 1 >>> 1);
-        System.out.println(Integer.MAX_VALUE);
         Solution solution = new Solution();
         System.out.println(solution.findMin(new int[]{4,5,6,7,0,1,2}));
     }
@@ -30,15 +28,9 @@ public class Solution {
         }
         int mid = from + to >>> 1;
         if (nums[mid] < nums[to]) {
-            if (mid > from) {
-                return Math.min(nums[mid], findMin(nums, from, mid - 1));
-            }
-            return Math.min(nums[from], nums[mid]);
+            return Math.min(nums[mid], findMin(nums, from, Math.max(mid -1, from)));
         } else {
-            if (mid + 1 <= to) {
-                return Math.min(nums[from], findMin(nums, mid + 1, to));
-            }
-            return Math.min(nums[from], nums[to]);
+            return Math.min(nums[from], findMin(nums, Math.min(mid + 1, to), to));
         }
     }
 }
