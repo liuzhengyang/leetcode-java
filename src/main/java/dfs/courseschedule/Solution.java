@@ -32,11 +32,14 @@ public class Solution {
     }
 
     private boolean dfs(Vertex vertex) {
+        if (vertex.color == 2) {
+            return true;
+        }
+        if (vertex.color == 1) {
+            return false;
+        }
         vertex.color = 1;
         for (Vertex each : vertex.adj) {
-            if (each.color == 1) {
-                return false;
-            }
             if (each.color != 2 && !dfs(each)) {
                 return false;
             }
