@@ -1,6 +1,9 @@
 package dfs.zero1matrix;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Queue;
 
 /**
  * @author liuzhengyang
@@ -41,6 +44,31 @@ public class Solution {
         }
 
         return minDistance;
+    }
+
+    private int bfs(int[][] matrix, int row, int col) {
+        boolean visited[][] = new boolean[matrix.length][];
+        if (matrix[row][col] == 0) {
+            return 0;
+        }
+        List<Point> previous = new ArrayList<>();
+        List<Point> next = new ArrayList<>();
+        previous.add(new Point(row, col));
+        while (!previous.isEmpty()) {
+
+        }
+
+        return 0;
+    }
+
+    private static class Point {
+        private int row;
+        private int col;
+
+        public Point(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
     }
 
     private int dfs(int[][] matrix, int row, int col) {
