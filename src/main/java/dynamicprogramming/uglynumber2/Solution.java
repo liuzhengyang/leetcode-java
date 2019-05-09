@@ -10,13 +10,15 @@ public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
         long start = System.currentTimeMillis();
-        System.out.println(solution.nthUglyNumber(1690));
+        System.out.println(solution.nthUglyNumber(1590));
         System.out.println("Cost " + (System.currentTimeMillis() - start));
     }
 
     static int[] divides = new int[]{5, 3, 2};
-    private Set<Integer> knownUglySet = new HashSet<>();
-    private Set<Integer> notUglySet = new HashSet<>();
+    static int maxNotUglyNumberSet = 5;
+    static int notUglyNumber = 0;
+    private static Set<Integer> knownUglySet = new HashSet<>();
+    private static Set<Integer> notUglySet = new HashSet<>();
     private int knownUglyUpper;
 
     public int nthUglyNumber(int n) {
@@ -38,16 +40,28 @@ public class Solution {
             return knownUglySet.contains(n);
         }
         boolean isUgly = false;
-        for (int i : divides) {
+        boolean cannotBeUgly = false;
+        for (int i : notUglySet) {
             if (n % i == 0) {
-                isUgly = isUglyNumber(n / i);
+                cannotBeUgly = true;
                 break;
             }
         }
+        if (!cannotBeUgly) {
+            for (int i : divides) {
+                if (n % i == 0) {
+                    isUgly = isUglyNumber(n / i);
+                    break;
+                }
+            }
+        }
+
         if (isUgly) {
             knownUglySet.add(n);
         } else {
-            notUglySet.add(n);
+            if (notUglyNumber ++ < maxNotUglyNumberSet) {
+                notUglySet.add(n);
+            }
         }
         return isUgly;
     }
