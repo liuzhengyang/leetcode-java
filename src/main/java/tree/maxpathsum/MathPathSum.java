@@ -8,54 +8,34 @@ import common.datastructure.TreeNode;
  * 2020/4/2
  */
 public class MathPathSum {
-
     /**
      * 5,4,8,11,null,13,4,7,2,null,null,null,1
      *
      * @param root
      * @return
      */
+    static int max;
+
     public int maxPathSum(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        int max = getMaxPathSumContains(root);
-        if (root.left != null) {
-            max = Math.max(max, maxPathSum(root.left));
-        }
-        if (root.right != null) {
-            max = Math.max(max, maxPathSum(root.right));
-        }
+        max = Integer.MIN_VALUE;
+        maxDownPath(root);
         return max;
     }
 
-    private int getMaxPathSumContains(TreeNode root) {
-        int val = root.val;
+    int maxDownPath(TreeNode root) {
+        if (root == null) {
+            return Integer.MIN_VALUE;
+        }
+        int left = 0;
         if (root.left != null) {
-            int left = doGetMaxPathSumContainsThis(root.left);
-            if (left > 0) {
-                val += left;
-            }
+            left = Math.max(maxDownPath(root.left), 0);
         }
+        int right = 0;
         if (root.right != null) {
-            int right = doGetMaxPathSumContainsThis(root.right);
-            if (right > 0) {
-                val += right;
-            }
+            right = Math.max(maxDownPath(root.right), 0);
         }
-        return val;
+        max = Math.max(max, root.val + left + right);
+        return root.val + Math.max(left, right);
     }
 
-    private int doGetMaxPathSumContainsThis(TreeNode root) {
-        int max = root.val;
-        int maxLeft = max;
-        int maxRight = max;
-        if (root.left != null) {
-            maxLeft = root.val + doGetMaxPathSumContainsThis(root.left);
-        }
-        if (root.right != null) {
-            maxRight = root.val + doGetMaxPathSumContainsThis(root.right);
-        }
-        return Math.max(max, Math.max(maxLeft, maxRight));
-    }
 }
