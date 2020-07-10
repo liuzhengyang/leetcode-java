@@ -39,9 +39,21 @@ while (!prev.isEmpty() {
 }
 ```
 
+BFS实战题目分析
+[jump game 3](https://leetcode.com/problems/jump-game-iii/)
+给定一个数组arr和起始位置start，每次在index为i的位置时，能够
+跳到i + arr[i]或i - arr[i]的位置（不能跳出数组），问能否跳到一个值为零的位置
+使用bfs遍历就可以完成，一直遍历（不走已经跳过的位置），直到调到一个0的位置或者没有位置可跳
+[jump game](https://leetcode.com/problems/jump-game/)
+
 如果有其他变种，例如01数组，也是类似解法
 
+
 ## DFS(Deep First Search)
+
+dfs常见写法
+
+
 
 ## DP(Dynamic Programming)
 
