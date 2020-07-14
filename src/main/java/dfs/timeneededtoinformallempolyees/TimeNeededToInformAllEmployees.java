@@ -24,6 +24,9 @@ public class TimeNeededToInformAllEmployees {
     }
 
     private int calculateTimeOfEmployee(int[] manager, int[] informTime, boolean[] visited, int[] time, int index) {
+        if (visited[index]) {
+            return time[index];
+        }
         visited[index] = true;
         if (manager[index] == -1) {
             time[index] = 0;

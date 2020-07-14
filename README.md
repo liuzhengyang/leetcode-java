@@ -120,7 +120,7 @@ N叉数和二叉树区别不大，最大深度也是高度，通过层次遍历�
 
 [Time Needed to Inform All Employees](https://leetcode.com/problems/time-needed-to-inform-all-employees/)
 
-树的层次遍历还是比较简单的，当时实际面试过程中的题目可能不会这么直接，有可能会故意用一些故事、背景包装，希望大家能够透过问题看到本质。
+树的层次遍历还是比较简单的，当然实际面试过程中的题目可能不会这么直接，有可能会故意用一些故事、背景包装，希望大家能够透过问题看到本质。
 
 #### BFS常见问题之01二维数组问题
 
@@ -146,7 +146,22 @@ N叉数和二叉树区别不大，最大深度也是高度，通过层次遍历�
 
 dfs常见写法框架
 
+```
+int dfs(Graph graph, boolean[] visited, int index) {
+    visited[index] = true;
+    int[] adjacent = graph.adjacent(index);
+    for (int adj : adjacent) {
+        if (!visited[]) {
+            // 递归处理货拿到dfs的结果，有的题目会要求汇总所有的节点的结果
+            dfs(graph, visited, adj);
+        }
+    }
+}
+```
 
+### 判断图中是否存在环
+使用三色标记法，没有访问过的节点为白色，正在dfs过程中的节点标记位灰色，如果一个节点dfs处理完，标记位黑色。
+如果在dfs过程中遇到了一个灰色的节点，则说明出现了环
 
 
 
