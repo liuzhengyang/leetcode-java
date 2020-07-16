@@ -246,6 +246,14 @@ island数量即为island总数减去非封闭island数量。
 [Number of Islands](https://leetcode.com/problems/number-of-islands/)
 相当于上面问题的简化版，区别是只需要计算island总数就可以了。
 
+[Max Area of Island](https://leetcode.com/problems/max-area-of-island/)
+每次dfs时统计遍历区域的和，最终计算一个最大值。
+
+[Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/)
+统计不能抵达边界的island的面积的和，和统计closed island问题类似。也有另一个解法，把所有的边界的值通过dfs修改二维数组的值为-1，
+然后再遍历统计值为1的数量。
+
+
 ### 判断图中是否存在环
 使用三色标记法，没有访问过的节点为白色，正在dfs过程中的节点标记位灰色，如果一个节点dfs处理完，标记位黑色。
 如果在dfs过程中遇到了一个灰色的节点，则说明出现了环
