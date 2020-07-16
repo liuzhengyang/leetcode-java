@@ -164,6 +164,73 @@ int dfs(Graph graph, boolean[] visited, int index) {
 }
 ```
 
+### 01二维数组问题
+
+经常出现的类型是二维int数组，0表示水，1表示陆地，陆地或水域区域周围（有时是上下左右4个方向有时是包括斜对角的8个方向）可以相连。
+基于这种场景，可以询问最大区域、区域个数等问题。
+
+01二维数组问题常见写法之dfs，参考NumberOfClosedIslands类
+首先判断输入合法性，对一些边界case进行处理。
+然后初始化需要的一些辅助数据，例如visited数组，需要注意这里如果visited是二维数组，需要提前把二维数组的一维数组部分初始化好。
+然后对每个位置，判断位置的值、是否访问过，如果符合条件，进行dfs处理。
+dfs函数中，先标记这个位置已经访问过。然后创建一个表示邻接方向的二维数组{{0,1}{0,-1},{-1,0},{1,0}}，
+对这个二维数组表示的每个方向判断是否在数组范围内、是否访问过等条件，满足条件继续dfs处理。
+
+```
+public int closedIsland(int[][] grid) {
+    if (grid == null || grid.length == 0 || grid[0].length == 0) {
+        return 0;
+    }
+    int islandNumber = 0;
+    int notClosedNumber = 0;
+    int[][] islandNumberMark = new int[grid.length][];
+    for (int i = 0; i < grid.length; i++) {
+        islandNumberMark[i] = new int[grid[i].length];
+    }
+    for (int i = 0; i < grid.length; i++) {
+        for (int j = 0; j < grid[i].length; j++) {
+            // island and not visited
+            if (grid[i][j] == 0 && islandNumberMark[i][j] == 0) {
+                boolean notClose = dfsMark(grid, islandNumberMark, i, j, ++islandNumber);
+                if (notClose) {
+                    notClosedNumber++;
+                }
+            }
+        }
+    }
+    return islandNumber - notClosedNumber;
+}
+
+
+/**
+ * true 不是close
+ * false 还不确定
+ */
+boolean dfsMark(int[][] grid, int[][] islandNumber, int row, int col, int number) {
+    islandNumber[row][col] = number;
+    boolean notClosed = 0 == row || row == grid.length - 1 || 0 == col || col == grid[row].length - 1;
+    int[][] directions = new int[][] {
+            {-1, 0},
+            {1, 0},
+            {0, -1},
+            {0, 1},
+    };
+    for (int[] direction : directions) {
+        int xDiff = direction[0];
+        int yDiff = direction[1];
+        int newRow = row + yDiff;
+        int newCol = col + xDiff;
+        if (newRow >= 0 && newRow < grid.length && newCol >= 0 && newCol < grid[row].length) {
+            if (grid[newRow][newCol] == 0 && islandNumber[newRow][newCol] == 0) {
+                notClosed = dfsMark(grid, islandNumber, newRow, newCol, number) || notClosed;
+            }
+        }
+    }
+
+    return notClosed;
+}
+```
+
 ### 判断图中是否存在环
 使用三色标记法，没有访问过的节点为白色，正在dfs过程中的节点标记位灰色，如果一个节点dfs处理完，标记位黑色。
 如果在dfs过程中遇到了一个灰色的节点，则说明出现了环
@@ -197,4 +264,6 @@ dynamic programming中文大家都称为动态规划，这个中文翻译名字�
 
 ## 其他常见题目
 
+## 其他注意事项
 
+注意检查题目，写完代码仔细检查，考虑边界case，避免出现低级错误，写完从头到尾用小黄鸭调试法讲解一下实现过程，要假设自己的代码有错误，尝试查找错误。
