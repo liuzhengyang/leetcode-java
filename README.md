@@ -146,6 +146,9 @@ N叉数和二叉树区别不大，最大深度也是高度，通过层次遍历�
 
 dfs常见写法框架
 
+注意有的场景只需要标记是否访问过就可以，有的场景可能需要三色标记。
+有的时候dfs需要和dp结合一下，或者直白一点说是加一个缓存(Map或数组存储之前计算过的结果）来减少计算。
+
 ```
 int dfs(Graph graph, boolean[] visited, int index) {
     visited[index] = true;
@@ -156,6 +159,8 @@ int dfs(Graph graph, boolean[] visited, int index) {
             dfs(graph, visited, adj);
         }
     }
+    // 对本节点执行某些操作，有可能会依赖从这个节点直接能够达到的邻接节点的结果
+    doSomething(graph, index);
 }
 ```
 
@@ -163,7 +168,23 @@ int dfs(Graph graph, boolean[] visited, int index) {
 使用三色标记法，没有访问过的节点为白色，正在dfs过程中的节点标记位灰色，如果一个节点dfs处理完，标记位黑色。
 如果在dfs过程中遇到了一个灰色的节点，则说明出现了环
 
+### 拓扑排序
 
+dfs的另一个应用是拓扑排序，举一个常见例子，大学生安排课程，某些课程需要在其他课程学习完之后才能学习，因此就形成了一个依赖关系图。
+把依赖关系当成边，对图进行dfs遍历，递归过程中，执行doSomething时把当前节点加入到结果列表中，最终的列表顺序就是拓扑排序顺序。
+由于可能出现循环依赖，因此需要使用判断图中是否存在环的方式检查是否有循环依赖。
+
+拓扑排序的其他使用场景还有
+- 任务编排
+- maven编译
+
+leetcode上的问题有
+
+[Course Schedule](https://leetcode.com/problems/course-schedule/)
+这个题目只需要判断是否有循环依赖。对数组的每个元素进行dfs（也要判断是否访问过了)，如果dfs中遇到了一个正在遍历的节点（灰色节点），说明有循环依赖。
+
+[https://leetcode.com/problems/course-schedule-ii/](https://leetcode.com/problems/course-schedule-ii/)
+准备一个List，doSomething时把节点放到List中，如果有循环依赖，返回空列表。
 
 ## DP(Dynamic Programming)
 
