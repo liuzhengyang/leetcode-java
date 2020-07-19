@@ -300,7 +300,14 @@ dynamic programming中文大家都称为动态规划，这个中文翻译名字�
 
 ## BinarySearch
 
-## 其他常见题目
+## 其他常见题目、解法
+
+### 双指针
+
+双指针的左右指针，指数组左右两个指针，不断互相逼近查找目标值
+比较好理解的是[Two Sum II - Input array is sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
+因为数组已经排好序，分别设置左指针指向0，右指针指向数组最后一个元素，比较两个指针的值的和，如果比目标值小，只能向右移动左指针，因为向左移动右指针只会比当前值更小。
+反之如果比目标和大了，需要向左移动右指针。
 
 ## 其他注意事项
 

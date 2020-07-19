@@ -13,6 +13,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * 几种解法
+ * 1. 暴力破解 两层循环
+ * 2. 先进行排序，然后固定第一个值时，二分搜索查找第二个
+ * 3. 保存值到index列表的映射，匹配查找优化到O(1)
+ *
  * @author liuzhengyang
  */
 public class Solution {
@@ -31,40 +36,26 @@ public class Solution {
             if (integers != null) {
                 if (target - num == num) {
                     if (integers.size() == 2) {
-                        return new int[]{integers.get(0), integers.get(1)};
+                        return new int[] {integers.get(0), integers.get(1)};
                     }
                     continue;
                 }
-                return new int[]{i, integers.get(0)};
+                return new int[] {i, integers.get(0)};
             }
         }
         return null;
     }
-    public int[] twoSum(int[] nums, int target) {
 
-        Map<Integer, Integer> numToIndexListMap = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            int num = nums[i];
-            Integer integer = numToIndexListMap.get(num);
-            if (integer == null) {
-                numToIndexListMap.put(num, i);
-            } else {
-                if (num + num == target) {
-                    return new int[]{integer, i};
-                }
-            }
-        }
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> numToIndexListMap = new HashMap<>(nums.length);
         for (int i = 0; i < nums.length; i++) {
             Integer supplementIndex = numToIndexListMap.get(target - nums[i]);
             if (supplementIndex != null) {
                 if (supplementIndex != i) {
-                    if (supplementIndex > i) {
-                        return new int[]{i, supplementIndex};
-                    } else {
-                        return new int[]{supplementIndex, i};
-                    }
+                    return new int[] {supplementIndex, i};
                 }
             }
+            numToIndexListMap.put(nums[i], i);
         }
         return null;
     }
@@ -79,7 +70,7 @@ public class Solution {
 
         String[] parts = input.split(",");
         int[] output = new int[parts.length];
-        for(int index = 0; index < parts.length; index++) {
+        for (int index = 0; index < parts.length; index++) {
             String part = parts[index].trim();
             output[index] = Integer.parseInt(part);
         }
@@ -92,7 +83,7 @@ public class Solution {
         }
 
         String result = "";
-        for(int index = 0; index < length; index++) {
+        for (int index = 0; index < length; index++) {
             int number = nums[index];
             result += Integer.toString(number) + ", ";
         }
