@@ -43,6 +43,7 @@ bfs能解决什么样的问题
 ### 普通bfs解题框架
 一个boolean[] visited数组，记录访问过的位置
 两个List<Node>，保存要遍历的节点和下次要遍历的节点，Node的值可以按照情况变化，比如可以是数组的index，也可以是一个Point(x,y)对象等
+注意这里的List在某些要去重的场景下需要使用Set代替
 
 ```
 // 创建需要的数据结构
@@ -147,9 +148,8 @@ N叉数和二叉树区别不大，最大深度也是高度，通过层次遍历�
 使用bfs遍历就可以完成，一直遍历（不走已经跳过的位置），直到调到一个0的位置或者没有位置可跳
 [jump game](https://leetcode.com/problems/jump-game/)
 
-如果有其他变种，例如01数组，也是类似解法
-
-#### 
+[Get Watched Videos by Your Friends](https://leetcode.com/problems/get-watched-videos-by-your-friends/)
+获取第N层好友的观看列表，关键在于怎么获得第N层好友，使用bfs即可实现，注意每一层的bfs要使用Set保存，因为可能有重复数据。
 
 
 ## DFS(Deep First Search)

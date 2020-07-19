@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -21,7 +23,7 @@ public class GetWatchedVideosByFriends {
         if (friends == null || friends.length == 0) {
             return Collections.emptyList();
         }
-        List<Integer> friendIdsOfLevel = getFriendsOfLevel(friends, id, level);
+        Set<Integer> friendIdsOfLevel = getFriendsOfLevel(friends, id, level);
         if (friendIdsOfLevel.isEmpty()) {
             return Collections.emptyList();
         }
@@ -70,11 +72,11 @@ public class GetWatchedVideosByFriends {
         }
     }
 
-    private List<Integer> getFriendsOfLevel(int[][] friends, int id, int level) {
+    private Set<Integer> getFriendsOfLevel(int[][] friends, int id, int level) {
         boolean[] visited = new boolean[friends.length];
         int levelCount = 0;
-        List<Integer> prev = new ArrayList<>();
-        List<Integer> next = new ArrayList<>();
+        Set<Integer> prev = new HashSet<>();
+        Set<Integer> next = new HashSet<>();
         prev.add(id);
         while (!prev.isEmpty()) {
             for (int index : prev) {
@@ -92,9 +94,9 @@ public class GetWatchedVideosByFriends {
                 return next;
             } else {
                 prev = next;
-                next = new ArrayList<>();
+                next = new HashSet<>();
             }
         }
-        return Collections.emptyList();
+        return Collections.emptySet();
     }
 }
