@@ -311,6 +311,7 @@ dynamic programming中文大家都称为动态规划，这个中文翻译名字�
 
 [Jump Game](https://leetcode.com/problems/jump-game/)
 从最左边开始，两个指针每轮更新，left = right + 1, right = max(last range step)，如果某一次遍历right没有更新，说明不能jump到
+
 [Jump Game II](https://leetcode.com/problems/jump-game-ii/)
 在Jump Game基础上增加了一个计数
 
