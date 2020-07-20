@@ -1,8 +1,6 @@
 package bfs.getwatchedvideosbyfriends;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -37,16 +35,12 @@ public class GetWatchedVideosByFriends {
         });
         List<VideoAndCount> collect = videoAndCountMap.values()
                 .stream()
-                .sorted(new Comparator<VideoAndCount>() {
-                    @Override
-                    public int compare(VideoAndCount o1, VideoAndCount o2) {
-                        if (o1.count == o2.count) {
-                            return o1.name.compareTo(o2.name);
-                        }
-                        return Integer.compare(o1.count, o2.count);
+                .sorted((o1, o2) -> {
+                    if (o1.count == o2.count) {
+                        return o1.name.compareTo(o2.name);
                     }
+                    return Integer.compare(o1.count, o2.count);
                 }).collect(Collectors.toList());
-        System.out.println(collect);
         return collect.stream().map(v -> v.name).collect(Collectors.toList());
     }
 

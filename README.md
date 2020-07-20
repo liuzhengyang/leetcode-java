@@ -309,6 +309,11 @@ dynamic programming中文大家都称为动态规划，这个中文翻译名字�
 因为数组已经排好序，分别设置左指针指向0，右指针指向数组最后一个元素，比较两个指针的值的和，如果比目标值小，只能向右移动左指针，因为向左移动右指针只会比当前值更小。
 反之如果比目标和大了，需要向左移动右指针。
 
+[Jump Game](https://leetcode.com/problems/jump-game/)
+从最左边开始，两个指针每轮更新，left = right + 1, right = max(last range step)，如果某一次遍历right没有更新，说明不能jump到
+[Jump Game II](https://leetcode.com/problems/jump-game-ii/)
+在Jump Game基础上增加了一个计数
+
 ## 其他注意事项
 
 写代码前把思路想清楚，思路确定差不多后和面试官沟通确认，并且要思路这种解法的时间空间复杂度是多少，预估耗时，思考是否有更优解法。
