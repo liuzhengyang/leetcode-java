@@ -315,6 +315,11 @@ dynamic programming中文大家都称为动态规划，这个中文翻译名字�
 [Jump Game II](https://leetcode.com/problems/jump-game-ii/)
 在Jump Game基础上增加了一个计数
 
+## 二分查找
+
+[Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
+先二分找到对应的行，再二分找对应的列
+
 ## 其他注意事项
 
 写代码前把思路想清楚，思路确定差不多后和面试官沟通确认，并且要思路这种解法的时间空间复杂度是多少，预估耗时，思考是否有更优解法。
