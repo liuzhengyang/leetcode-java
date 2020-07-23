@@ -321,10 +321,18 @@ dynamic programming中文大家都称为动态规划，这个中文翻译名字�
 [Jump Game II](https://leetcode.com/problems/jump-game-ii/)
 在Jump Game基础上增加了一个计数
 
+#### 双指针解决数组元素移动类问题
+
+常用于在数组内移动一些元素，并保持其他数组不变
+[Remove Element](https://leetcode.com/problems/remove-element/)
+
+
 ## 二分查找
 
 [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
 先二分找到对应的行，再二分找对应的列
+
+## 常见题目套路总结梳理
 
 ## 其他注意事项
 
