@@ -142,11 +142,17 @@ N叉数和二叉树区别不大，最大深度也是高度，通过层次遍历�
 
 
 #### 其他类型
+
+##### 最短路径
+
 [jump game 3](https://leetcode.com/problems/jump-game-iii/)
 给定一个数组arr和起始位置start，每次在index为i的位置时，能够
 跳到i + arr[i]或i - arr[i]的位置（不能跳出数组），问能   否跳到一个值为零的位置
 使用bfs遍历就可以完成，一直遍历（不走已经跳过的位置），直到调到一个0的位置或者没有位置可跳
-[jump game](https://leetcode.com/problems/jump-game/)
+
+[jump game 4](https://leetcode.com/problems/jump-game-iv/)
+比jump game3更复杂一些，引入了相同值也能跳的规则，实现上也是类似的bfs方式。不过为了节省空间等不再每次使用两个List而是
+使用一个queue。并且做了一些map、是否访问过等优化。
 
 [Get Watched Videos by Your Friends](https://leetcode.com/problems/get-watched-videos-by-your-friends/)
 获取第N层好友的观看列表，关键在于怎么获得第N层好友，使用bfs即可实现，注意每一层的bfs要使用Set保存，因为可能有重复数据。
