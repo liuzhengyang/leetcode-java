@@ -1,6 +1,7 @@
 package twopointer;
 
 /**
+ * 有序数组，要能联想到左右双指针，指针的移动能够带来一些偏向，即移动位置能够控制变大变小
  * @author liuzhengyang
  */
 public class TwoSumSortedArray {
