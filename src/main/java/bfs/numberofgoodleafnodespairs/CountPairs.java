@@ -1,10 +1,8 @@
-package bfs.countpairs;
+package bfs.numberofgoodleafnodespairs;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
@@ -27,6 +25,7 @@ public class CountPairs {
         int i = countPairs.countPairs(root, 3);
         System.out.println(i);
     }
+
     public int countPairs(TreeNode root, int distance) {
         if (root == null) {
             return 0;
