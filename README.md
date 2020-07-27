@@ -337,6 +337,13 @@ dynamic programming中文大家都称为动态规划，这个中文翻译名字�
 [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
 先二分找到对应的行，再二分找对应的列
 
+## 常用数据结构应用
+
+### stack
+
+[Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation/)
+模拟实现Java的操作数栈即可，保存一个int的栈，然后对每个操作符设置对应的操作方法。
+
 ## 常见题目套路总结梳理
 
 ## 其他注意事项

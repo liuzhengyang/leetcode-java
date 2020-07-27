@@ -11,6 +11,7 @@ public class MinFlips {
         System.out.println(minFlips.minFlips("00000"));
         System.out.println(minFlips.minFlips("001011101"));
     }
+
     public int minFlips(String target) {
         if (target == null) {
             return 0;
