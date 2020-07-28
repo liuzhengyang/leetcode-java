@@ -80,42 +80,54 @@ while (!prev.isEmpty() {
 很多树的问题可以用层级遍历解决，树的广度优先搜索就是层级遍历，下面找一些题目举例
 
 [对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/)
+
 判断一个二叉树是否是对称的，对称的特点是以中心为镜像，把树的每一层想象成一个列表，问题即为树的每一层列表是不是对称的，
 通过上面的层次遍历，能够轻松的构建出每一层的列表，而判断列表是不是对称的，也很好实现。
 
 [树的层次遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
+
 这个有点直接了，直接按照上面的bfs框架，就能获得每一层的列表
 
 [二叉树的锯齿形层次遍历](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/)
 [N叉树的层序遍历](https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/)
+
 也是层次遍历，对于锯齿，只需要记录一个boolean值，初始false，每遍历一层切换true/false一次，如果是true则遍历时把列表翻转一下。
 
 [二叉树的层次遍历 II](https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/)
+
 自底向上遍历，层次遍历后把最终顺序翻转一下就可以
 
 [二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/)
+
 即最高的叶子节点，叶子节点就是子节点都为空的节点，通过层次遍历，并记录层次数，如果遍历到某一层时某个节点的子节点都是空的，则返回当前遍历的层次即可。
 
 [N叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-n-ary-tree/)
+
 N叉数和二叉树区别不大，最大深度也是高度，通过层次遍历记录高度即可。
 
 [二叉树的右视图](https://leetcode-cn.com/problems/binary-tree-right-side-view/)
+
 二叉树的右视图，即为层次遍历的每个列表的最后一个元素
 
 [Deepest Leaves Sum](https://leetcode.com/problems/deepest-leaves-sum/)
+
 层次遍历到最后一层的和
 
 [找树左下角的值](https://leetcode-cn.com/problems/find-bottom-left-tree-value/)
+
 层次遍历，每次遍历覆盖记录每一层第一个值，遍历完返回即可。
 
 [在每个树行中找最大值](https://leetcode-cn.com/problems/find-largest-value-in-each-tree-row/)
+
 层次遍历，每层找最大值
 
 [二叉树中距离为K的节点](https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/)
+
 从二叉树中某一个节点开始距离为K的节点，通过parent的引用线上也算合法路径。这个问题可以把二叉树转换成一个图(图结构中每个节点有一个邻接链表)，
 然后从起始节点开始bfs，宽度优先向外遍历k次即可。
 
 [Count Good Nodes in Binary Tree](https://leetcode.com/problems/count-good-nodes-in-binary-tree/)
+
 从根节点开始，记录一个总数，bfs每次遍历到节点计数+1，如果子节点大于当前节点，则加入到下次遍历。
 这个问题也可以通过dfs来解决。可以查看代码中具体的实现
 
@@ -125,11 +137,13 @@ N叉数和二叉树区别不大，最大深度也是高度，通过层次遍历�
 
 例如
 [Target Sum](https://leetcode.com/problems/target-sum/)
+
 这个题目可以使用暴力算法或加上dp缓存实现。这里提供一个bfs的解法，对于每一个元素的加减，想象成一个树状结构的bfs遍历，遍历的内容是之前的所有加和的结果集，
 从上一层的结果集遍历对每个元素加减下一个数组元素得到下一层的结果集，由于可能有重复的加和，所以要保存一个计数。最终寻找结果集的值和数量即为结果。
 题目这里限制了原始数组非负数且总和在一定范围内，所以可以用数组提高效率。参考TargetSum.java
 
 [Number of Good Leaf Nodes Pairs](https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/)
+
 一种比较直观的解题思路为首先根据二叉树构造成一个图，即把子节点和父节点的关系也构建出来。标记所有的叶子节点，然后从每个叶子节点bfs遍历k次看能达到的其他
 子节点的数量。
 
@@ -142,6 +156,7 @@ N叉数和二叉树区别不大，最大深度也是高度，通过层次遍历�
 举例
 
 [01 Matrix](https://leetcode.com/problems/01-matrix/)
+
 计算每个位置到最近的0节点的距离。从所有的0节点开始bfs遍历，遍历到一个值为1的节点时，当前的步数为从起始0到当前1节点的最短距离，
 每个节点保存一个到最近的0节点的最小值，如果当前最短距离比之前最小值小则更新最小值。
 
@@ -151,15 +166,18 @@ N叉数和二叉树区别不大，最大深度也是高度，通过层次遍历�
 ##### 最短路径
 
 [jump game 3](https://leetcode.com/problems/jump-game-iii/)
+
 给定一个数组arr和起始位置start，每次在index为i的位置时，能够
 跳到i + arr[i]或i - arr[i]的位置（不能跳出数组），问能   否跳到一个值为零的位置
 使用bfs遍历就可以完成，一直遍历（不走已经跳过的位置），直到调到一个0的位置或者没有位置可跳
 
 [jump game 4](https://leetcode.com/problems/jump-game-iv/)
+
 比jump game3更复杂一些，引入了相同值也能跳的规则，实现上也是类似的bfs方式。不过为了节省空间等不再每次使用两个List而是
 使用一个queue。并且做了一些map、是否访问过等优化。
 
 [Get Watched Videos by Your Friends](https://leetcode.com/problems/get-watched-videos-by-your-friends/)
+
 获取第N层好友的观看列表，关键在于怎么获得第N层好友，使用bfs即可实现，注意每一层的bfs要使用Set保存，因为可能有重复数据。
 
 
@@ -256,17 +274,21 @@ boolean dfsMark(int[][] grid, int[][] islandNumber, int row, int col, int number
 举例
 
 [Number of Closed Islands](https://leetcode.com/problems/number-of-closed-islands/submissions/)
+
 记录一个island总数，同时也作为island的编号生成器、非封闭的island总数，创建一个二维数组标记island属于哪个island编号，
 如果遇到值为0的位置，则从这个位置开始dfs遍历，标记dfs遇到的标记数组位置为island编号，如果dfs过程中任何一个点位于边上，则非封闭数量加1，最终封闭
 island数量即为island总数减去非封闭island数量。
 
 [Number of Islands](https://leetcode.com/problems/number-of-islands/)
+
 相当于上面问题的简化版，区别是只需要计算island总数就可以了。
 
 [Max Area of Island](https://leetcode.com/problems/max-area-of-island/)
+
 每次dfs时统计遍历区域的和，最终计算一个最大值。
 
 [Number of Enclaves](https://leetcode.com/problems/number-of-enclaves/)
+
 统计不能抵达边界的island的面积的和，和统计closed island问题类似。也有另一个解法，把所有的边界的值通过dfs修改二维数组的值为-1，
 然后再遍历统计值为1的数量。
 
@@ -288,9 +310,11 @@ dfs的另一个应用是拓扑排序，举一个常见例子，大学生安排�
 leetcode上的问题有
 
 [Course Schedule](https://leetcode.com/problems/course-schedule/)
+
 这个题目只需要判断是否有循环依赖。对数组的每个元素进行dfs（也要判断是否访问过了)，如果dfs中遇到了一个正在遍历的节点（灰色节点），说明有循环依赖。
 
 [https://leetcode.com/problems/course-schedule-ii/](https://leetcode.com/problems/course-schedule-ii/)
+
 准备一个List，doSomething时把节点放到List中，如果有循环依赖，返回空列表。
 
 ### 树相关问题dfs解法
@@ -308,7 +332,9 @@ dynamic programming中文大家都称为动态规划，这个中文翻译名字�
 这里放出我的理解，动态规划就是递归加上缓存。
 
 动态规划问题示例
+
 [Dungeon Game](https://leetcode.com/problems/dungeon-game/)
+
 若使用暴力破解，则复杂度为2的阶乘，复杂度过高。这种题目一般先用公式表示这一步和附近几步之间的关系。
 例如我们用f(i,j)表示第i行第j列需要多少血量，a(i,j)表示数组的值，在不考虑边界的情况下f(i,j) = max(1, min((f(i+1,j) - a(i,j)), (f(i,j+1) - a(i,j))))
 然后递归终止在f(rowLength-1, colLength-1)，值为Math.max(1, 1 - a(rowLength-1, colLength-1))。
@@ -325,13 +351,16 @@ dynamic programming中文大家都称为动态规划，这个中文翻译名字�
 
 双指针的左右指针，指数组左右两个指针，不断互相逼近查找目标值
 比较好理解的是[Two Sum II - Input array is sorted](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
+
 因为数组已经排好序，分别设置左指针指向0，右指针指向数组最后一个元素，比较两个指针的值的和，如果比目标值小，只能向右移动左指针，因为向左移动右指针只会比当前值更小。
 反之如果比目标和大了，需要向左移动右指针。
 
 [Jump Game](https://leetcode.com/problems/jump-game/)
+
 从最左边开始，两个指针每轮更新，left = right + 1, right = max(last range step)，如果某一次遍历right没有更新，说明不能jump到
 
 [Jump Game II](https://leetcode.com/problems/jump-game-ii/)
+
 在Jump Game基础上增加了一个计数
 
 #### 双指针解决数组元素移动类问题
@@ -343,6 +372,7 @@ dynamic programming中文大家都称为动态规划，这个中文翻译名字�
 ## 二分查找
 
 [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
+
 先二分找到对应的行，再二分找对应的列
 
 ## 常用数据结构应用
@@ -350,6 +380,7 @@ dynamic programming中文大家都称为动态规划，这个中文翻译名字�
 ### stack
 
 [Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation/)
+
 模拟实现Java的操作数栈即可，保存一个int的栈，然后对每个操作符设置对应的操作方法。
 
 ## 常见题目套路总结梳理
@@ -364,6 +395,12 @@ dynamic programming中文大家都称为动态规划，这个中文翻译名字�
 
 注意判断空（参数、map.get后结果)等，注意数组越界问题
 
-写代码前把思路想清楚，思路确定差不多后和面试官沟通确认，并且要思路这种解法的时间空间复杂度是多少，预估耗时，思考是否有更优解法。
-注意检查题目，写完代码仔细检查，考虑边界case，避免出现低级错误，写完从头到尾用小黄鸭调试法讲解一下实现过程，要假设自己的代码有错误，尝试查找错误。
-编码注意可读性，有时经常看到一些解法使用到比较trick的技巧例如复用一些内存数据，虽然能够带来一点点效率提升，但是我认为并不直观，毕竟面试时还是需要让人看懂比较重要。
+- 写代码前把思路想清楚，思路确定差不多后和面试官沟通确认，并且要思路这种解法的时间空间复杂度是多少，预估耗时，思考是否有更优解法。
+- 注意检查题目，写完代码仔细检查，考虑边界case，避免出现低级错误，写完从头到尾用小黄鸭调试法讲解一下实现过程，要假设自己的代码有错误，尝试查找错误。
+- 编码注意可读性，有时经常看到一些解法使用到比较trick的技巧例如复用一些内存数据，虽然能够带来一点点效率提升，但是我认为并不直观，毕竟面试时还是需要让人看懂比较重要。
+
+其他常见低级错误
+
+- 数组越界
+- 没判断空，例如二维数组没有初始化一维数组
+- 复制错变量，比如有两段类似的代码，一个处理左节点一个处理右节点，则可能会使用错变量
