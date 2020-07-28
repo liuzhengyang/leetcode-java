@@ -307,6 +307,14 @@ leetcode上的问题有
 dynamic programming中文大家都称为动态规划，这个中文翻译名字确实很差，从名字上根本看不出是什么含义。
 这里放出我的理解，动态规划就是递归加上缓存。
 
+动态规划问题示例
+[Dungeon Game](https://leetcode.com/problems/dungeon-game/)
+若使用暴力破解，则复杂度为2的阶乘，复杂度过高。这种题目一般先用公式表示这一步和附近几步之间的关系。
+例如我们用f(i,j)表示第i行第j列需要多少血量，a(i,j)表示数组的值，在不考虑边界的情况下f(i,j) = max(1, min((f(i+1,j) - a(i,j)), (f(i,j+1) - a(i,j))))
+然后递归终止在f(rowLength-1, colLength-1)，值为Math.max(1, 1 - a(rowLength-1, colLength-1))。
+在下边界和有边界的公式也能类似推导出来。
+有了公式之后，可以发现依赖函数的最小值选择不影响当前函数的选择，增加一个二维数组作为缓存来避免重复计算，即完成了dp（动态规划）过程。
+
 ## Tree
 
 ## BinarySearch
