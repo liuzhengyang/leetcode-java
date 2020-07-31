@@ -326,6 +326,16 @@ leetcode上的问题有
 计算子树中字母和当前节点相同的数量。一种解决思路为保存每个字母的计数，在dfs遍历到每个节点时，记录一个当前字母的计数，记录完计数加一，然后遍历完子节点后看一下这个字母的计数，
 减去当前值即为当前这个节点的结果值。另外这个问题需要提前构造好树结构，因为参数中提供的edge是无向边。
 
+
+## 图
+
+### 最短路径
+
+[Path with Maximum Probability](https://leetcode.com/problems/path-with-maximum-probability/
+
+最大概率路径问题，首先根据edges和prob构建图，以及对应的边的概率prob。从start开始遍历图，用一个Map<Integer, Double>记录所有已经遍历过的位置和对应的概率prob，如果遇到已经遍历过的节点并且当前的
+路径的概率比之前大则替换，如果没有遇到过放到map中，否则说明没有可遍历的了，结束。
+
 ## DP(Dynamic Programming)
 
 dynamic programming中文大家都称为动态规划，这个中文翻译名字确实很差，从名字上根本看不出是什么含义。
