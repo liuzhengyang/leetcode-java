@@ -1,5 +1,6 @@
 package heap.minimumdifferencebetweenlargestandsmallestvalueinthreemoves;
 
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
 /**
@@ -14,10 +15,10 @@ public class MinimumDifferenceBetweenLargestAndSmallestValueInThreeMoves {
     public static void main(String[] args) {
         MinimumDifferenceBetweenLargestAndSmallestValueInThreeMoves m =
                 new MinimumDifferenceBetweenLargestAndSmallestValueInThreeMoves();
-        System.out.println(m.minDifference(new int[] {5, 3, 2, 4}));
-        System.out.println(m.minDifference(new int[] {1, 5, 0, 10, 14}));
-        System.out.println(m.minDifference(new int[] {6, 6, 0, 1, 1, 4, 6}));
-        System.out.println(m.minDifference(new int[] {1, 5, 6, 14, 15}));
+        System.out.println(m.minDifference2Solution(new int[] {5, 3, 2, 4}));
+        System.out.println(m.minDifference2Solution(new int[] {1, 5, 0, 10, 14}));
+        System.out.println(m.minDifference2Solution(new int[] {6, 6, 0, 1, 1, 4, 6}));
+        System.out.println(m.minDifference2Solution(new int[] {1, 5, 6, 14, 15}));
     }
 
     private static final int MOVE = 3;
@@ -48,6 +49,18 @@ public class MinimumDifferenceBetweenLargestAndSmallestValueInThreeMoves {
         int min = Integer.MAX_VALUE;
         for (int i = 0; i <= MOVE; i++) {
             min = Math.min(min, largestNums[i] - smallestNums[HEAP_SIZE - i - 1]);
+        }
+        return min;
+    }
+
+    private int minDifference2Solution(int[] nums) {
+        if (nums == null || nums.length <= HEAP_SIZE) {
+            return 0;
+        }
+        Arrays.sort(nums);
+        int min = nums[nums.length - 1] - nums[0];
+        for (int i = 0; i < HEAP_SIZE; i++) {
+            min = Math.min(min, nums[nums.length - 1 - i] - nums[HEAP_SIZE - 1 - i]);
         }
         return min;
     }
