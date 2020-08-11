@@ -285,6 +285,11 @@ leetcode上的问题有
 
 准备一个List，doSomething时把节点放到List中，如果有循环依赖，返回空列表。
 
+[Course Schedule4](https://leetcode.com/problems/course-schedule-iv/description/)
+
+查询是否是一个课程的深度依赖，由于查询比较多，所以要提前建立好所有节点的深度依赖（直接依赖和直接依赖的深度依赖，如果没有依赖，返回空）。
+通过dfs查找构建所有节点的深度依赖，最后遍历查询即可。
+
 ### 树相关问题dfs解法
 
 一些树的问题，每个节点的值依赖所有子节点或者父节点的值，则可以用dfs解决
