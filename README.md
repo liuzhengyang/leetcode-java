@@ -304,11 +304,22 @@ leetcode上的问题有
 
 ### 最短路径
 
+最短路径有bfs(无权重)、dijkstra（非负权重）、topology(有向无环图可以有负权重)、Bellman-Ford(能够解决任何权重图且没有负向环的最短路径问题)集中算法实现
+
 [Path with Maximum Probability](https://leetcode.com/problems/path-with-maximum-probability/
 
 最大概率路径问题，首先根据edges和prob构建图，以及对应的边的概率prob。从start开始遍历图，用一个Map<Integer, Double>记录所有已经遍历过的位置和对应的概率prob，如果遇到已经遍历过的节点并且当前的
 路径的概率比之前大则替换，如果没有遇到过放到map中，否则说明没有可遍历的了，结束。
 优化版本，使用队列保存待遍历的节点（类似bfs思想），对队列里取出的每个节点，判断能否发现新边或更大概率的边，如果可以放到队列继续。
+
+### 并查集(Union Find)
+
+用于查询两个节点是否能互相连通
+并查集通过记录一个count值，每次dfs将互相能连通的节点的id设置成相同的count值，并把count++，进行下一轮dfs，最后判断两个节点的id是否相同来判断是否能连通
+
+### 有向图强连通分量
+
+Kosaraju's algorithm: 先计算G reverse的reversePost order，然后对G按照这个order进行dfs，每一轮dfs遍历到的节点之间是强连通的
 
 ## DP(Dynamic Programming)
 
