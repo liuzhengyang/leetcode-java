@@ -319,7 +319,7 @@ leetcode上的问题有
 
 ### 有向图强连通分量
 
-Kosaraju's algorithm: 先计算G reverse的reversePost order，然后对G按照这个order进行dfs，每一轮dfs遍历到的节点之间是强连通的
+Kosaraju's algorithm: 先计算G reverse的reversePost order，然后对G按照这个order对没有遍历过的节点进行dfs，每一轮dfs遍历到的节点之间是强连通的
 
 ## DP(Dynamic Programming)
 
