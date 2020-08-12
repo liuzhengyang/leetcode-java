@@ -1,9 +1,7 @@
 package bfs.wordladder;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -16,6 +14,7 @@ import java.util.Set;
  * https://leetcode.com/problems/word-ladder/
  * 思路，把这些单词当成图中的节点，然后通过判断能否修改一个字母来判断一个节点能否连到另一个节点。
  * 但是在节点非常多的情况下构造图的时间太长，改成lazy的方式
+ * 再考虑每次判断所有节点是否和当前节点相邻的成本也比较高，改成判断当前节点的word能转换成哪些单词，到set中比对
  * @author liuzhengyang
  */
 public class Solution {
@@ -28,15 +27,13 @@ public class Solution {
         System.out.println(solution.ladderLength("hit", "cog", new ArrayList<>(Arrays.asList("hot","dot","dog","lot","log"))));
         System.out.println(solution.ladderLength("nanny", "aloud", ladders));
         System.out.println("Cost " + (System.currentTimeMillis() - start));
-//        List<String> ladders = Arrays.asList("cog");
-//        System.out.println(solution.ladderLength("hog", "cog", ladders));
     }
 
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        if (!wordList.contains(beginWord)) {
-            wordList.add(beginWord);
+        Set<String> wordSet = new HashSet<>(wordList);
+        if (!wordSet.contains(endWord)) {
+            return 0;
         }
-        Map<String, Set<String>> graph = new HashMap<>();
         Set<String> visited = new HashSet<>();
         Queue<Node> queue = new LinkedList<>();
         queue.add(new Node(1, beginWord));
@@ -47,7 +44,7 @@ public class Solution {
                 return poll.depth;
             }
             int depth = poll.depth;
-            Set<String> adjacentList = getCanJumpToWords(poll.word, wordList, graph);
+            Set<String> adjacentList = getCanJumpToWords(poll.word, wordSet);
             for (String adjacent : adjacentList) {
                 if (!visited.contains(adjacent)) {
                     queue.offer(new Node(depth + 1, adjacent));
@@ -68,21 +65,19 @@ public class Solution {
         }
     }
 
-    private Set<String> getCanJumpToWords(String fromWord, List<String> words, Map<String, Set<String>> graph) {
-        Set<String> cacheResult = graph.get(fromWord);
-        if (cacheResult != null) {
-            return cacheResult;
-        }
+    private Set<String> getCanJumpToWords(String fromWord, Set<String> wordSet) {
         Set<String> result = new HashSet<>();
 
-        for (String w : words) {
-            if (!w.equals(fromWord)) {
-                if (canTransform(fromWord, w)) {
-                    result.add(w);
+        for (int i = 0; i < fromWord.length(); i++) {
+            char[] chars = fromWord.toCharArray();
+            for (int j = 0; j < 26; j++) {
+                chars[i] = (char) ('a' + j);
+                String str = new String(chars);
+                if (wordSet.contains(str)) {
+                    result.add(str);
                 }
             }
         }
-        graph.put(fromWord, result);
         return result;
     }
 
@@ -98,27 +93,6 @@ public class Solution {
                 }
             }
         }
-        return diffCount <= 1;
-    }
-
-    private Map<String, Set<String>> buildGraph(List<String> words, String startWord, String endWord) {
-        Map<String, Set<String>> graph = new HashMap<>();
-        if (!words.contains(startWord)) {
-            words.add(startWord);
-        }
-        if (!words.contains(endWord)) {
-            words.add(endWord);
-        }
-        for (int i = 0; i < words.size(); i++) {
-            for (int j = i + 1; j < words.size(); j++) {
-                String from = words.get(i);
-                String to = words.get(j);
-                if (canTransform(from, to)) {
-                    graph.computeIfAbsent(from, w -> new HashSet<>()).add(to);
-                    graph.computeIfAbsent(to, w -> new HashSet<>()).add(from);
-                }
-            }
-        }
-        return graph;
+        return true;
     }
 }
