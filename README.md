@@ -148,6 +148,10 @@ N叉数和二叉树区别不大，最大深度也是高度，通过层次遍历�
 
 获取第N层好友的观看列表，关键在于怎么获得第N层好友，使用bfs即可实现，注意每一层的bfs要使用Set保存，因为可能有重复数据。
 
+[word ladder](https://leetcode.com/problems/word-ladder/)
+[word ladder2](https://leetcode.com/problems/word-ladder-ii/)
+
+从1个单词转换到另一个单词，求最短转换次数和路径，使用bfs思路实现。
 
 ## DFS(Deep First Search)
 

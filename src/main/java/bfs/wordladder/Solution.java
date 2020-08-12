@@ -80,19 +80,4 @@ public class Solution {
         }
         return result;
     }
-
-    private boolean canTransform(String from, String to) {
-        int diffCount = 0;
-        char[] fromCharArray = from.toCharArray();
-        char[] toCharArray = to.toCharArray();
-        for (int i = 0; i < from.length(); i++) {
-            if (fromCharArray[i] != toCharArray[i]) {
-                diffCount ++;
-                if (diffCount > 1) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 }
