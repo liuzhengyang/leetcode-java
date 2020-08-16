@@ -436,3 +436,9 @@ dynamic programming中文大家都称为动态规划，这个中文翻译名字�
 - 没判断空，例如二维数组没有初始化一维数组
 - 复制错变量，比如有两段类似的代码，一个处理左节点一个处理右节点，则可能会使用错变量
 - 循环从大到小循环时，i--写成i++
+
+### 其他参考资料
+
+- https://hrbust-acm-team.gitbooks.io/acm-book/content/dynamic_programming/state.html
+- https://oi-wiki.org/dp/state/
+- https://www.luogu.com.cn/contest/list
