@@ -7,17 +7,43 @@ import java.util.Set;
 
 /**
  * https://leetcode.com/problems/longest-consecutive-sequence/
- * 要求O(n)，首先构建出一个图，图中节点是各个数字，数字直接如果相邻，则进行连接。
+ * 方案1: 要求O(n)，首先构建出一个图，图中节点是各个数字，数字直接如果相邻，则进行连接。
  * 构建完图后，进行dfs遍历，找到最大的联通子图
+ * <p>
+ * 方案2: 把所有的数字放到set中，然后对所有数字进行遍历，遍历时跳过num-1存在的数字，遍历过程中统计连续的数量
+ *
  * @author liuzhengyang
  */
 public class LongestConsecutiveSequence {
     public static void main(String[] args) {
         LongestConsecutiveSequence longestConsecutiveSequence = new LongestConsecutiveSequence();
-        System.out.println(longestConsecutiveSequence.longestConsecutive(new int[]{100,4,200,1,3,2}));
+        System.out.println(longestConsecutiveSequence.longestConsecutive(new int[] {100, 4, 200, 1, 3, 2}));
     }
 
     public int longestConsecutive(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        Set<Integer> allNums = new HashSet<>();
+        for (int num : nums) {
+            allNums.add(num);
+        }
+        int max = 0;
+        for (int num : nums) {
+            if (!allNums.contains(num - 1)) {
+                int currentConsecutiveCount = 0;
+                int value = num;
+                while (allNums.contains(value)) {
+                    currentConsecutiveCount++;
+                    value++;
+                }
+                max = Math.max(max, currentConsecutiveCount);
+            }
+        }
+        return max;
+    }
+
+    public int longestConsecutiveGraphVersion(int[] nums) {
         if (nums == null || nums.length == 0) {
             return 0;
         }
@@ -96,8 +122,6 @@ public class LongestConsecutiveSequence {
 
     /**
      * 如果当前数字存在，计算当前数字-1对应的数字的值
-     * @param oldValue
-     * @return
      */
     private int computeLowerNewValue(int oldValue) {
         if (oldValue == 0) {
