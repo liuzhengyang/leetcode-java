@@ -321,6 +321,79 @@ leetcode上的问题有
 用于查询两个节点是否能互相连通
 并查集通过记录一个count值，每次dfs将互相能连通的节点的id设置成相同的count值，并把count++，进行下一轮dfs，最后判断两个节点的id是否相同来判断是否能连通
 
+并查集的模板实现
+```java
+public class UnionFind {
+    private int[] parent;
+    private int[] size;
+    private int componentCount = 0;
+
+    public UnionFind(int n) {
+        this.parent = new int[n];
+        this.size = new int[n];
+        for (int i = 0; i < n; i++) {
+            parent[i] = i;
+            size[i] = 1;
+        }
+        componentCount = n;
+    }
+
+    public boolean findAndUnion(int x, int y) {
+        int parentX = getParent(x);
+        int parentY = getParent(y);
+        if (parentX == parentY) {
+            return false;
+        }
+        union(x, y);
+        return true;
+    }
+
+    public void union(int x, int y) {
+        int parentX = getParent(x);
+        int parentY = getParent(y);
+        if (parentX == parentY) {
+            return;
+        }
+        int sizeX = size[parentX];
+        int sizeY = size[parentY];
+        if (sizeX < sizeY) {
+            parent[parentX] = parentY;
+            size[parentY] += size[parentX];
+        } else {
+            parent[parentY] = parentX;
+            size[parentX] += size[parentY];
+        }
+        componentCount--;
+    }
+
+    public int getParent(int i) {
+        if (parent[i] == i) {
+            return i;
+        }
+        parent[i] = getParent(parent[i]);
+        return parent[i];
+    }
+
+    public boolean isConnected(int x, int y) {
+        return getParent(x) == getParent(y);
+    }
+
+    public int count() {
+        return componentCount;
+    }
+}
+```
+
+并查集能够解决的题目有
+[Remove Max Number of Edges to Keep Graph Fully Traversable](https://leetcode-cn.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable/)
+首先对类型为3的路径的节点加入到并查集中，加入的过程中需要判断两个点是否已经属于一个集合，如果属于则说明这个边不需要添加。
+处理完类型为3的边后依次添加Alice能够使用的边的节点，如果处理完Alice的边，最终的集合数量大于1，则说明不能联通，返回-1.
+对于Bob也做类似处理。最终如果都能联通，则使用最开始的边，减去并查集中加入的边的数量。
+
+[Detect Cycles in 2D Grid](https://leetcode-cn.com/problems/detect-cycles-in-2d-grid/)
+这个题目可以使用dfs解决，也可以使用并查集解决，
+
+
 ### 有向图强连通分量
 
 Kosaraju's algorithm: 先计算G reverse的reversePost order，然后对G按照这个order对没有遍历过的节点进行dfs，每一轮dfs遍历到的节点之间是强连通的
